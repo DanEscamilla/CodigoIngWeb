@@ -1,0 +1,51 @@
+@model Tarea
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Tarea</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Prioridad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Prioridad)
+        </dd>
+    </dl>
+</div>
+<div>
+    <form asp-action="Comentar" asp-route-id="@Model.Id">
+        <textarea name="comentario"></textarea>
+        <input type="hidden" name="id" value="@Model.Id"/>
+        <input type="submit" value="Comentar" class="btn btn-success"/>
+    </form>
+</div>
+<div>
+    <ul>
+        @foreach (var comentario in Model.Comentarios)
+        {
+            <li>@comentario.Fecha: @comentario.Comentario</li>
+        }
+    </ul>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new {id = Model.Id}) |
+    <a asp-action="Index">Back to List</a>
+</div>
